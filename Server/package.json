@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"No build step required\""
-  }
-  ,
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
