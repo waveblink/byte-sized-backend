@@ -12,9 +12,13 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors({
-  origin: 'https://byte-sized-recipev2.vercel.app',
+  origin: [
+    'https://byte-sized-recipev2.vercel.app',
+    'https://byte-sized-recipev2-git-master-waveblinks-projects.vercel.app',
+    'https://byte-sized-recipev2-l6x9w3k2f-waveblinks-projects.vercel.app'
+  ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
