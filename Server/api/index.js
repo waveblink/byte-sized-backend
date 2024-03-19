@@ -4,7 +4,7 @@ import authRoutes from '../routes/authRoutes.js';
 import recipeRoutes from '../routes/recipeRoutes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import authenticateToken from './middleware/authenticateToken.js';
+import authenticateToken from '../middleware/authenticateToken.js';
 
 dotenv.config();
 
