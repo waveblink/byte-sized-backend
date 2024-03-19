@@ -1,4 +1,3 @@
-// Correctly import the pg package and destructure Pool from it
 import dotenv from 'dotenv';
 import pg from 'pg';
 const { Pool } = pg;
@@ -27,7 +26,6 @@ export const query = async (text, params) => {
   }
 };
 
-// Assuming you have a db.js file where you've set up your database connection
 /**
  * Save a recipe to the database for a specific user.
  * 
@@ -60,7 +58,7 @@ export async function saveAIGeneratedRecipe(recipe) {
 
 export async function saveRecipe(recipeData) {
   try {
-      // Construct the SQL query and parameters for inserting the recipe data
+      // create the SQL query and parameters for inserting the recipe data
       const query = `
           INSERT INTO ai_generated_recipes (user_id, name, ingredients, instructions, meal_type_id, cuisine_id, nutrition_facts)
           VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -82,11 +80,10 @@ export async function saveRecipe(recipeData) {
       return result.rows[0]; // Return the saved recipe record
   } catch (error) {
       console.error('Error saving recipe in the database:', error);
-      throw error; // Rethrow or handle as needed
+      throw error; 
   }
 }
 
-// Assuming this is in a file like dbOperations.js or a similar module
 export async function getRecipesByUserId(userId) {
   const sql = `
   SELECT agr.*, c.name AS cuisine_name 
@@ -96,11 +93,11 @@ export async function getRecipesByUserId(userId) {
     `;
 
   try {
-      const result = await query(sql, [userId]); // Execute the query
-      return result.rows; // Return the rows from the query result
+      const result = await query(sql, [userId]); 
+      return result.rows; 
   } catch (error) {
       console.error('Error fetching recipes from database:', error);
-      throw error; // Rethrow the error to be caught by the caller
+      throw error; 
   }
 }
 
@@ -110,7 +107,7 @@ export async function saveRecipeAndUserMapping(userId, recipeData) {
       await pool.query('BEGIN');
 
       // Save the recipe and get its ID
-      // Ensure the order of fields in the INSERT statement matches the order of variables passed.
+      
       const recipeResult = await pool.query(
           'INSERT INTO ai_generated_recipes (user_id, name, ingredients, instructions, meal_type_id, cuisine_id, nutrition_facts) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id', 
           [userId, recipeData.name, recipeData.ingredients, recipeData.instructions, recipeData.mealTypeId, recipeData.cuisineId, recipeData.nutritionFacts]
@@ -128,9 +125,9 @@ export async function saveRecipeAndUserMapping(userId, recipeData) {
 
       return recipeId;
   } catch (error) {
-      // Rollback transaction on error
+      
       await pool.query('ROLLBACK');
       console.error('Error during saving recipe and user mapping:', error);
-      throw error; // re-throw the error for further handling
+      throw error; 
   }
 }

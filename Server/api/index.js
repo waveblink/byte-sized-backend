@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from './routes/authRoutes.js';
-import recipeRoutes from './routes/recipeRoutes.js'; // Assumes public routes (login, register)
+import recipeRoutes from './routes/recipeRoutes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import authenticateToken from './middleware/authenticateToken.js';
@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 app.use(cors({
   origin: 'https://byte-sized-recipev2.vercel.app',
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust based on your needs
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
